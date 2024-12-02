@@ -6,7 +6,7 @@
   # Use https://search.nixos.org/packages to find packages
   packages = [
     pkgs.zulu21
-    pkgs.maven3
+    pkgs.gradle_8
   ];
   # Sets environment variables in the workspace
   env = {};
@@ -14,17 +14,15 @@
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
       "vscjava.vscode-java-pack"
-      "rangav.vscode-thunder-client"
+      "redhat.java"
+      "vscjava.vscode-gradle"
     ];
     workspace = {
       # Runs when a workspace is first created with this `dev.nix` file
       onCreate = {
-        install = "mvn clean install";
+        install = "gradlew clean build";
       };
       # Runs when a workspace is (re)started
-      onStart = {
-        run-server = "PORT=3000 mvn spring-boot:run";
-      };
     };
   };
 }
